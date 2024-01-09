@@ -36,5 +36,5 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-           "${{env.BUILDKIT_IMAGE}}:lts"
+           "${{env.BUILDKIT_IMAGE}}:0.1"
            "${{env.BUILDKIT_IMAGE}}:latest"
