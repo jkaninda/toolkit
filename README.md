@@ -20,7 +20,7 @@ services:
   toolkit:
     image: jkaninda/toolkit:latest
     container_name: toolkit
-    command: ["sleep", "600"]
+    command: ["/bin/bash", "sh"]
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.kube:/root/.kube
