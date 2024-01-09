@@ -1,6 +1,6 @@
 FROM ubuntu:23.10
 RUN apt-get update -qq \
-    && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common jq
+    && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common jq git
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 RUN curl https://get.docker.com/ > dockerinstall && chmod 777 dockerinstall && ./dockerinstall
 

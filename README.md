@@ -13,3 +13,16 @@ DevOps Portable toolkit
 - kustomize
 - jq
 - k6
+
+```yaml
+version: '3.7'
+services:
+  toolkit:
+    image: jkaninda/toolkit:latest
+    container_name: toolkit
+    command: ["sleep", "600"]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.kube:/root/.kube
+      - ~/.ssh:/root/.ssh # If you use private CVS
+```
