@@ -1,6 +1,6 @@
 #!/bin/bash
 
- docker build -t jkaninda/toolkit:latest .
+ docker build -f src/Dockerfile -t jkaninda/toolkit:latest .
  
  docker compose up -d
 

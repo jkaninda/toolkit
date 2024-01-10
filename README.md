@@ -13,6 +13,7 @@ DevOps Portable toolkit
 - kustomize
 - jq
 - k6
+- s3fs
 
 ```yaml
 version: '3.7'
@@ -25,4 +26,23 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.kube:/root/.kube
       - ~/.ssh:/root/.ssh # If you use private CVS
+```
+## Mount S3 
+
+> Command : s3-mount
+
+```yaml
+version: '3.7'
+services:
+  toolkit:
+    image: jkaninda/toolkit:latest
+    container_name: toolkit
+    command: ["/bin/bash", "sh"]
+    volumes:
+      - ./custome-volume:/custome-volume
+    environment:
+      - ACCESS_KEY=${ACCESS_KEY}
+      - SECRET_KEY=${SECRET_KEY}
+      - BUCKETNAME=${BUCKETNAME}
+      - S3_ENDPOINT=https://s3.us-west-2.amazonaws.com
 ```
