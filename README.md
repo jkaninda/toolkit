@@ -37,6 +37,9 @@ services:
   toolkit:
     image: jkaninda/toolkit:latest
     container_name: toolkit
+    privileged: true
+    devices:
+    - "/dev/fuse"
     command: ["/bin/bash", "sh"]
     volumes:
       - ./custome-volume:/custome-volume
