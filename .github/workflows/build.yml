@@ -34,6 +34,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
+          file: "./src/Dockerfile"
           platforms: linux/amd64,linux/arm64
           tags: |
            "${{env.BUILDKIT_IMAGE}}:0.1"
