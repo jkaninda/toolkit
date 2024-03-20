@@ -12,6 +12,7 @@ DevOps Portable toolkit
 - helm
 - kustomize
 - jq
+- yq
 - k6
 - s3fs
 
@@ -21,7 +22,6 @@ services:
   toolkit:
     image: jkaninda/toolkit:latest
     container_name: toolkit
-    command: ["/bin/bash", "sh"]
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.kube:/root/.kube
@@ -40,7 +40,6 @@ services:
     privileged: true
     devices:
     - "/dev/fuse"
-    command: ["/bin/bash", "sh"]
     volumes:
       - ./custome-volume:/custome-volume
     environment:
