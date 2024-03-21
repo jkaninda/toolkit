@@ -7,7 +7,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV VERSION="0.1"
 ARG TEMP_DIR=/temp
 RUN apt-get update -qq \
-    && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common jq git wget supervisor build-essential libcurl4-openssl-dev libxml2-dev mime-support s3fs -y
+    && apt-get install curl gnupg2 jq git wget supervisor s3fs -y
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 
 RUN curl https://get.docker.com/ > dockerinstall && chmod 777 dockerinstall && ./dockerinstall
