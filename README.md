@@ -14,18 +14,9 @@ DevOps Portable toolkit
 - jq
 - yq
 - k6
-- s3fs
 - pre-commit
 - cosign
 
 ```yaml
-version: '3.7'
-services:
-  toolkit:
-    image: jkaninda/toolkit:latest
-    container_name: toolkit
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ~/.kube:/root/.kube
-      - ~/.ssh:/root/.ssh # If you use private CVS
 ```
+curl -L 

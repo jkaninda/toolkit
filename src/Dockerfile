@@ -1,21 +1,18 @@
 FROM gcr.io/projectsigstore/cosign:v2.2.4 as cosign-bin
 
 FROM ubuntu:22.04
-ENV BUCKETNAME=""
-ENV ACCESS_KEY=""
-ENV SECRET_KEY=""
-ENV S3_ENDPOINT=https://s3.amazonaws.com
 ARG DEBIAN_FRONTEND=noninteractive
-ENV VERSION="0.2"
+ENV VERSION="0.3.0"
 ARG TEMP_DIR=/temp
 LABEL auth="Jonas Kaninda"
 LABEL github="https://github.com/jkaninda/toolkit"
 RUN apt-get update -qq \
-    && apt-get install -qqy curl gnupg2 jq git wget supervisor s3fs python3 python3-pip -y
+    && apt-get install -qqy curl gnupg2 jq tar supervisor git wget python3 python3-pip -y
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 WORKDIR /temp
 
-RUN curl https://get.docker.com/ > dockerinstall && chmod 777 dockerinstall && ./dockerinstall
+RUN curl https://get.docker.com/ > dockerinstall
+#RUN chmod 777 dockerinstall && ./dockerinstall
 RUN wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
 chmod +x /usr/bin/yq
 
@@ -48,14 +45,12 @@ RUN mkdir -p $TEMP_DIR && \
  chmod 777 $TEMP_DIR && \
  mkdir -p $TEMP_DIR/s3cache && \
  chmod 777 $TEMP_DIR/s3cache
-## Copy scripts
-COPY src/scripts/backup.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/backup.sh
-COPY src/scripts/s3-mount.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/s3-mount.sh
-## Create link
-RUN ln -s /usr/local/bin/s3-mount.sh /usr/local/bin/s3-mount
-RUN ln -s /usr/local/bin/backup.sh /usr/local/bin/backup
+
+ RUN curl -L -o notifier-0.1.0-linux-amd64.tar.gz https://github.com/jkaninda/notifier/releases/download/0.1.0/notifier-0.1.0-linux-amd64.tar.gz
+ RUN tar -xzf notifier-0.1.0-linux-amd64.tar.gz && rm notifier-0.1.0-linux-amd64.tar.gz
+
+RUN mv notifier /usr/local/bin/notifier && \
+chmod +x /usr/local/bin/notifier
 
 ADD src/supervisord.conf /etc/supervisor/supervisord.conf
 CMD ["/usr/bin/supervisord"]

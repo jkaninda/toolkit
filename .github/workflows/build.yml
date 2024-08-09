@@ -11,6 +11,7 @@ on:
           type: string
 env:
   BUILDKIT_IMAGE: jkaninda/toolkit
+  TAG: "0.3"
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -35,5 +36,5 @@ jobs:
           file: "./src/Dockerfile"
           platforms: linux/amd64,linux/arm64
           tags: |
-           "${{env.BUILDKIT_IMAGE}}:0.2"
+           "${{env.BUILDKIT_IMAGE}}:${{env.TAG}}"
            "${{env.BUILDKIT_IMAGE}}:latest"
