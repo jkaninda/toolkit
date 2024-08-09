@@ -18,4 +18,11 @@ DevOps Portable toolkit
 - cosign
 
 ```yaml
+services:
+  toolkit:
+    image: jkaninda/toolkit
+    container_name: toolkit
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.kube:/root/.kube
 ```
