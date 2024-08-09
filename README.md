@@ -19,4 +19,3 @@ DevOps Portable toolkit
 
 ```yaml
 ```
-curl -L 

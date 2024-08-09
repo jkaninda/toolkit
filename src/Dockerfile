@@ -12,7 +12,7 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 WORKDIR /temp
 
 RUN curl https://get.docker.com/ > dockerinstall
-#RUN chmod 777 dockerinstall && ./dockerinstall
+RUN chmod 777 dockerinstall && ./dockerinstall
 RUN wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
 chmod +x /usr/bin/yq
 
