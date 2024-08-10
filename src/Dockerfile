@@ -4,8 +4,9 @@ FROM ubuntu:22.04
 ARG DEBIAN_FRONTEND=noninteractive
 ENV VERSION="0.3.0"
 ARG TEMP_DIR=/temp
-LABEL auth="Jonas Kaninda"
+LABEL author="Jonas Kaninda"
 LABEL github="https://github.com/jkaninda/toolkit"
+ARG notifierVersion="0.1.1"
 RUN apt-get update -qq \
     && apt-get install -qqy curl gnupg2 jq tar supervisor git wget python3 python3-pip -y
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
@@ -46,8 +47,8 @@ RUN mkdir -p $TEMP_DIR && \
  mkdir -p $TEMP_DIR/s3cache && \
  chmod 777 $TEMP_DIR/s3cache
 
- RUN curl -L -o notifier-0.1.0-linux-amd64.tar.gz https://github.com/jkaninda/notifier/releases/download/0.1.0/notifier-0.1.0-linux-amd64.tar.gz
- RUN tar -xzf notifier-0.1.0-linux-amd64.tar.gz && rm notifier-0.1.0-linux-amd64.tar.gz
+ RUN curl -L -o notifier-${notifierVersion}-linux-amd64.tar.gz https://github.com/jkaninda/notifier/releases/download/${notifierVersion}/notifier-${notifierVersion}-linux-amd64.tar.gz
+ RUN tar -xzf notifier-${notifierVersion}-linux-amd64.tar.gz && rm notifier-${notifierVersion}-linux-amd64.tar.gz
 
 RUN mv notifier /usr/local/bin/notifier && \
 chmod +x /usr/local/bin/notifier
